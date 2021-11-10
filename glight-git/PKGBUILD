@@ -1,0 +1,37 @@
+_pkgname=glight
+pkgname="$_pkgname-git"
+pkgver=v0.8.3.r19.g551abe9
+pkgrel=1
+provides=("$_pkgname")
+arch=(x86_64)
+url=https://github.com/aroffringa/glight
+license=(GPL3)
+makedepends=(cmake)
+depends=(aubio ola gtkmm3 boost)
+source=(
+  git+https://github.com/aroffringa/glight
+  glight.desktop
+)
+sha256sums=(
+  SKIP
+  SKIP
+)
+
+pkgver() {
+  cd "$_pkgname"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "$_pkgname"
+  mkdir -p build
+  cd build
+  cmake .. -DCMAKE_INSTALL_PREFIX:PATH=/usr
+  make
+}
+
+package() {
+  cd "$_pkgname/build"
+  make DESTDIR="$pkgdir" install
+  install -Dm644 "$srcdir"/glight.desktop "$pkgdir"/usr/share/applications/glight.desktop
+}
