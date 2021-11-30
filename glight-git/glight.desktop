@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Glight
-Icon=applications-utilities
-Exec=/usr/bin/glight
-Type=Application
-StartupNotify=false
-Categories=Utility;

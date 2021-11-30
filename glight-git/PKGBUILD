@@ -1,6 +1,6 @@
 _pkgname=glight
 pkgname="$_pkgname-git"
-pkgver=v0.8.3.r19.g551abe9
+pkgver=v0.8.3.r21.g2f7325a
 pkgrel=1
 provides=("$_pkgname")
 arch=(x86_64)
@@ -10,10 +10,8 @@ makedepends=(cmake)
 depends=(aubio ola gtkmm3 boost)
 source=(
   git+https://github.com/aroffringa/glight
-  glight.desktop
 )
 sha256sums=(
-  SKIP
   SKIP
 )
 
@@ -33,5 +31,4 @@ build() {
 package() {
   cd "$_pkgname/build"
   make DESTDIR="$pkgdir" install
-  install -Dm644 "$srcdir"/glight.desktop "$pkgdir"/usr/share/applications/glight.desktop
 }
